@@ -29,4 +29,11 @@ export class ApiService {
     getUsers() {
         return this.http.get( this.apiURL + '/chatapp/getusers').pipe();
     }
+    loginUser(userData) {
+        return this.http.post<any>(this.apiURL + "/authentication/loginuser", userData);
+    }
+    logout(cb) {
+        localStorage.removeItem("authToken");
+        cb();
+    }
 }

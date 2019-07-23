@@ -1,1 +1,17 @@
-<p>signin works!</p>
+<div class="si_container">
+  <mat-card>
+    <mat-toolbar>Sign in to the ChatApp</mat-toolbar>
+    <mat-divider></mat-divider>
+    <div class="form_container">
+      <form (submit)="signin()" [formGroup]="f" class="frm">
+        <mat-form-field>
+          <input formControlName="username" name="username" type="text" matInput placeholder="Username">
+        </mat-form-field>
+        <mat-form-field>
+          <input name="password" formControlName="password" type="password" matInput placeholder="Password">
+        </mat-form-field>
+        <button type="submit" mat-raised-button mat-button color="primary">{{ loginText }}</button>
+      </form>
+    </div>
+  </mat-card>
+</div>

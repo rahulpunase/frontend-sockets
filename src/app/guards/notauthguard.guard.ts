@@ -12,7 +12,7 @@ export class NotauthguardGuard implements CanActivate {
   }
   canActivate(arss: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if(this.api.isLoggedIn()) {
-      this.router.navigate(["/feeds"]);
+      this.router.navigate(["/home"]);
       return false;
     }
     return true;

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatIconModule, MatFormField, MatFormFieldModule, MatSelectModule, MatFormFieldControl, MatInputModule, MatCard, MatCardModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,7 @@ import { SigninComponent } from './components/setup/authentication/signin/signin
 import { ApiService } from './services/api.service';
 import { NotauthguardGuard } from './guards/notauthguard.guard';
 import { AuthguardGuard } from './guards/authguard.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/mainUI/home/home.component';
 import { HomeTabsComponent } from './components/mainUI/home/home-tabs/home-tabs.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -19,9 +19,11 @@ import { ChatComponent } from './components/mainUI/home/home-tabs/chat/chat.comp
 import { MatListModule } from '@angular/material/list';
 import { ExploreComponent } from './components/mainUI/home/home-tabs/explore/explore.component';
 import { ChatWindowComponent } from './components/mainUI/chat-window/chat-window.component';
-import { MatRippleModule } from '@angular/material/core';
+import { MatRippleModule, MatOptionModule } from '@angular/material/core';
 import { GetUsersResolver } from './components/mainUI/home/home-tabs/chat/resolve/get-users.resolver';
 import { SubjectService } from './services/subjects.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpConfigInterceptor } from './services/interceptors.class';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,14 @@ import { SubjectService } from './services/subjects.service';
     MatCheckboxModule,
     MatIconModule,
     MatTabsModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    
   ],
   providers: [
     SocketService,
@@ -52,8 +61,16 @@ import { SubjectService } from './services/subjects.service';
     NotauthguardGuard,
     AuthguardGuard,
     GetUsersResolver,
-    SubjectService
+    SubjectService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function tokenGetter() {
+  return localStorage.getItem('authToken');
+}
