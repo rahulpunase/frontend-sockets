@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatIconModule, MatFormField, MatFormFieldModule, MatSelectModule, MatFormFieldControl, MatInputModule, MatCard, MatCardModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,9 +19,10 @@ import { ChatComponent } from './components/mainUI/home/home-tabs/chat/chat.comp
 import { MatListModule } from '@angular/material/list';
 import { ExploreComponent } from './components/mainUI/home/home-tabs/explore/explore.component';
 import { ChatWindowComponent } from './components/mainUI/chat-window/chat-window.component';
-import { MatRippleModule } from '@angular/material/core';
+import { MatRippleModule, MatOptionModule } from '@angular/material/core';
 import { GetUsersResolver } from './components/mainUI/home/home-tabs/chat/resolve/get-users.resolver';
 import { SubjectService } from './services/subjects.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,13 @@ import { SubjectService } from './services/subjects.service';
     MatCheckboxModule,
     MatIconModule,
     MatTabsModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCardModule,
+    ReactiveFormsModule
   ],
   providers: [
     SocketService,
