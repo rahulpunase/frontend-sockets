@@ -11,7 +11,7 @@ import { SigninComponent } from './components/setup/authentication/signin/signin
 import { ApiService } from './services/api.service';
 import { NotauthguardGuard } from './guards/notauthguard.guard';
 import { AuthguardGuard } from './guards/authguard.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/mainUI/home/home.component';
 import { HomeTabsComponent } from './components/mainUI/home/home-tabs/home-tabs.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -23,6 +23,7 @@ import { MatRippleModule, MatOptionModule } from '@angular/material/core';
 import { GetUsersResolver } from './components/mainUI/home/home-tabs/chat/resolve/get-users.resolver';
 import { SubjectService } from './services/subjects.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpConfigInterceptor } from './services/interceptors.class';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatInputModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [
     SocketService,
@@ -59,8 +61,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     NotauthguardGuard,
     AuthguardGuard,
     GetUsersResolver,
-    SubjectService
+    SubjectService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function tokenGetter() {
+  return localStorage.getItem('authToken');
+}

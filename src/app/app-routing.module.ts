@@ -9,13 +9,14 @@ import { ExploreComponent } from './components/mainUI/home/home-tabs/explore/exp
 import { ChatWindowComponent } from './components/mainUI/chat-window/chat-window.component';
 import { HomeTabsComponent } from './components/mainUI/home/home-tabs/home-tabs.component';
 import { GetUsersResolver } from './components/mainUI/home/home-tabs/chat/resolve/get-users.resolver';
+import { AuthguardGuard } from './guards/authguard.guard';
 
 const routes: Routes = [
   {
     path: '', redirectTo: 'authentication', pathMatch: 'full',
   },
   {
-    path: 'authentication', component: AuthenticationComponent,
+    path: 'authentication', component: AuthenticationComponent, canActivate: [NotauthguardGuard],
     children: [{
       path: '', redirectTo: 'login', pathMatch: 'full'
     }, {
@@ -23,7 +24,7 @@ const routes: Routes = [
     }]
   },
   {
-    path: 'home', component: HomeComponent, children: [
+    path: 'home', component: HomeComponent, canActivate:[AuthguardGuard], children: [
       {
         path: '', component: HomeTabsComponent, children: [{
           path: '', redirectTo: 'chat', pathMatch: 'full',
