@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-chat-window',
@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class ChatWindowComponent implements OnInit {
 
   constructor() { }
+  screenHeight: number;
 
   ngOnInit() {
+    this.screenHeight = screen.availHeight - 56;
   }
-
 }

@@ -36,4 +36,7 @@ export class ApiService {
         localStorage.removeItem("authToken");
         cb();
     }
+    getUserInfo(id) {
+        return this.http.get(this.apiURL + '/chatapp/getuserinfo?chatterId=' + id).pipe();
+    }
 }
