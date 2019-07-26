@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatIconModule, MatFormField, MatFormFieldModule, MatSelectModule, MatFormFieldControl, MatInputModule, MatCard, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatIconModule, MatFormField, MatFormFieldModule, MatSelectModule, MatFormFieldControl, MatInputModule, MatCard, MatCardModule, MatMenuModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +24,9 @@ import { GetUsersResolver } from './components/mainUI/home/home-tabs/chat/resolv
 import { SubjectService } from './services/subjects.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpConfigInterceptor } from './services/interceptors.class';
+import { InputBoxDirective } from './components/mainUI/chat-window/inputbox.directive';
+import { HeaderComponent } from './components/header/header.component';
+import { GetUserInfoResolver } from './components/mainUI/chat-window/resolve/get-user-info.resolver';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { HttpConfigInterceptor } from './services/interceptors.class';
     HomeTabsComponent,
     ChatComponent,
     ExploreComponent,
-    ChatWindowComponent
+    ChatWindowComponent,
+    InputBoxDirective,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,7 @@ import { HttpConfigInterceptor } from './services/interceptors.class';
     MatInputModule,
     MatCardModule,
     ReactiveFormsModule,
-    
+    MatMenuModule
   ],
   providers: [
     SocketService,
@@ -61,6 +66,7 @@ import { HttpConfigInterceptor } from './services/interceptors.class';
     NotauthguardGuard,
     AuthguardGuard,
     GetUsersResolver,
+    GetUserInfoResolver,
     SubjectService,
     {
       provide: HTTP_INTERCEPTORS,

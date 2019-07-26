@@ -10,34 +10,57 @@ import { ChatWindowComponent } from './components/mainUI/chat-window/chat-window
 import { HomeTabsComponent } from './components/mainUI/home/home-tabs/home-tabs.component';
 import { GetUsersResolver } from './components/mainUI/home/home-tabs/chat/resolve/get-users.resolver';
 import { AuthguardGuard } from './guards/authguard.guard';
+import { GetUserInfoResolver } from './components/mainUI/chat-window/resolve/get-user-info.resolver';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'authentication', pathMatch: 'full',
+    path: '', 
+    redirectTo: 'authentication', 
+    pathMatch: 'full',
   },
   {
-    path: 'authentication', component: AuthenticationComponent, canActivate: [NotauthguardGuard],
-    children: [{
-      path: '', redirectTo: 'login', pathMatch: 'full'
-    }, {
-      path: 'login', component: SigninComponent
-    }]
-  },
-  {
-    path: 'home', component: HomeComponent, canActivate:[AuthguardGuard], children: [
+    path: 'authentication', 
+    component: AuthenticationComponent, 
+    canActivate: [NotauthguardGuard],
+    children: [
       {
-        path: '', component: HomeTabsComponent, children: [{
-          path: '', redirectTo: 'chat', pathMatch: 'full',
-        }, {
-          path: 'chat', component: ChatComponent, /*resolve: {
-            users: GetUsersResolver
-          }*/
-        }, {
-          path: 'explore', component: ExploreComponent
-        }]
+        path: '', redirectTo: 'login', pathMatch: 'full'
+      }, 
+      {
+        path: 'login', component: SigninComponent
+      }
+    ]
+  },
+  {
+    path: 'home', 
+    component: HomeComponent, 
+    canActivate:[AuthguardGuard], 
+    children: [
+      {
+        path: '', 
+        component: HomeTabsComponent, 
+        children: [
+          {
+            path: '', redirectTo: 'chat', pathMatch: 'full',
+          }, 
+          {
+            path: 'chat', 
+            component: ChatComponent, 
+            resolve: {
+              users: GetUsersResolver
+            }
+          }, 
+          {
+            path: 'explore', component: ExploreComponent
+          }
+        ]
       },
       {
-        path: 'cw/:chatId', component: ChatWindowComponent
+        path: 'cw/:chatterId', 
+        component: ChatWindowComponent, 
+        resolve: {
+          userInfo: GetUserInfoResolver
+        }
       }
     ]
   }
