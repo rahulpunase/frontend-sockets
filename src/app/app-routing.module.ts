@@ -14,31 +14,51 @@ import { GetUserInfoResolver } from './components/mainUI/chat-window/resolve/get
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'authentication', pathMatch: 'full',
+    path: '', 
+    redirectTo: 'authentication', 
+    pathMatch: 'full',
   },
   {
-    path: 'authentication', component: AuthenticationComponent, canActivate: [NotauthguardGuard],
-    children: [{
-      path: '', redirectTo: 'login', pathMatch: 'full'
-    }, {
-      path: 'login', component: SigninComponent
-    }]
-  },
-  {
-    path: 'home', component: HomeComponent, canActivate:[AuthguardGuard], children: [
+    path: 'authentication', 
+    component: AuthenticationComponent, 
+    canActivate: [NotauthguardGuard],
+    children: [
       {
-        path: '', component: HomeTabsComponent, children: [{
-          path: '', redirectTo: 'chat', pathMatch: 'full',
-        }, {
-          path: 'chat', component: ChatComponent, resolve: {
-            users: GetUsersResolver
+        path: '', redirectTo: 'login', pathMatch: 'full'
+      }, 
+      {
+        path: 'login', component: SigninComponent
+      }
+    ]
+  },
+  {
+    path: 'home', 
+    component: HomeComponent, 
+    canActivate:[AuthguardGuard], 
+    children: [
+      {
+        path: '', 
+        component: HomeTabsComponent, 
+        children: [
+          {
+            path: '', redirectTo: 'chat', pathMatch: 'full',
+          }, 
+          {
+            path: 'chat', 
+            component: ChatComponent, 
+            resolve: {
+              users: GetUsersResolver
+            }
+          }, 
+          {
+            path: 'explore', component: ExploreComponent
           }
-        }, {
-          path: 'explore', component: ExploreComponent
-        }]
+        ]
       },
       {
-        path: 'cw/:chatterId', component: ChatWindowComponent, resolve: {
+        path: 'cw/:chatterId', 
+        component: ChatWindowComponent, 
+        resolve: {
           userInfo: GetUserInfoResolver
         }
       }

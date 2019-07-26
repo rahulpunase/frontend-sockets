@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   headerShow: boolean = true;
   applicationDisplayName = environment.applicationDisplayName;
+  chatterInfo = null;
   chatWindowMenuButtons: Array<{
     label: string,
     icon: string,
@@ -48,10 +49,23 @@ export class HeaderComponent implements OnInit {
     /** ------------------------------------------ */
     this.subjectService.$rSFHobs.subscribe(bool => {
       this.headerShow = bool;
+    });
+    this.subjectService.$aCIobs.subscribe(chatterInfo => {
+      if(chatterInfo!=null) {
+        this.chatterInfo = chatterInfo;      
+      }
     })
   }
   private navigate(to) {
     console.log(to);
+  }
+
+  get activeChatterName() {
+    if(this.chatterInfo!=null) {
+      return this.chatterInfo.firstName + ' ' + this.chatterInfo.lastName; 
+    } else {
+      return '';
+    }
   }
 
 

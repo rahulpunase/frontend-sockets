@@ -1,23 +1,23 @@
 <mat-toolbar class="toolbar_fixed" color="primary">
-        <mat-toolbar-row *ngIf="headerShow">
-          <span>{{ applicationDisplayName }}</span>
-          <span class="spacer"></span>
-          <mat-icon class="icon" aria-hidden="false" aria-label="Search Contacts">search</mat-icon>
-          <mat-icon class="icon" aria-hidden="false" aria-label="Go to settings">settings</mat-icon>
-        </mat-toolbar-row>
-        <!-- FOR CHAT WINDOW SCREEN -->
-        <mat-toolbar-row *ngIf="!headerShow">
-          <span>{{ 'Andres Iniesta' }}</span>
-          <span class="spacer"></span>
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button (click)="navigate(button.linkPath)" *ngFor="let button of chatWindowMenuButtons" mat-menu-item>
-              <mat-icon>{{button.icon}}</mat-icon>
-              <span>{{button.label}}</span>
-            </button>
-          </mat-menu>
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <div class="fake_toolbar"></div>
+  <mat-toolbar-row *ngIf="headerShow">
+    <span>{{ applicationDisplayName }}</span>
+    <span class="spacer"></span>
+    <mat-icon class="icon" aria-hidden="false" aria-label="Search Contacts">search</mat-icon>
+    <mat-icon class="icon" aria-hidden="false" aria-label="Go to settings">settings</mat-icon>
+  </mat-toolbar-row>
+  <!-- FOR CHAT WINDOW SCREEN -->
+  <mat-toolbar-row *ngIf="!headerShow">
+    <span>{{ activeChatterName }}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="navigate(button.linkPath)" *ngFor="let button of chatWindowMenuButtons" mat-menu-item>
+        <mat-icon>{{button.icon}}</mat-icon>
+        <span>{{button.label}}</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="fake_toolbar"></div>
